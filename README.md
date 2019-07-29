@@ -1,4 +1,4 @@
-# 2019_Grant_Thiery_C3S511_ERA5_lakes_SPQB
+# 2019_Grant_Thiery_C3S511-SPQB-ERA5LAND
 
 Data processing and figure development for the lake mixed layer temperature and ice depth ERA5 reanalysis datasets.
 
