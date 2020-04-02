@@ -41,17 +41,17 @@ def reducer(file):
 #SETTINGS
 #==============================================================================
 
-title_font = 12
+title_font = 14
 
-tick_font = 10
+tick_font = 12
 
 #==============================================================================
 #INITIALIZE
 #==============================================================================
 
-directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/icedepth/depth/timmean'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/depth/timmean'
 os.chdir(directory)
-o_directory = '/Users/Luke/Documents/PHD/C3S_511/FIGURES/icedepth'
+o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
 files = []
 for file in sorted(os.listdir(directory)):
@@ -107,9 +107,10 @@ for season,ax in zip(seasons,axes.flat):
             lw=0.1, color='#a6bddb', zorder=1)
     ax.set_ylim(20,90)
     ax.set_yticks(np.arange(20,90,10))
-    ax.set_yticklabels(['20°','30°','40°','50°','60°','70°','80°','90°'])
+    ax.set_yticklabels(['20°','30°','40°','50°','60°','70°','80°','90°'],fontdict={'fontsize':tick_font})
     ax.set_xlim(0,2.4)
-    ax.set_xticks(np.arange(0,2.4,0.2))
+    ax.set_xticklabels([0.2,None,0.6,None,1.0,None,1.4,None,1.8,None,2.2,None],fontdict={'fontsize':tick_font})
+    ax.set_xticks(np.arange(0.2,2.4,0.2))
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     ax.xaxis.grid(color='0.8', linestyle='dashed', linewidth=0.5,zorder=0)
@@ -117,12 +118,12 @@ for season,ax in zip(seasons,axes.flat):
     ax.set_title(months[count-1],loc='left',fontsize=title_font)
 
 #labels
-f.text(0.5, 0.075, 'Ice depth (m)', ha='center', fontsize=title_font)
+f.text(0.5, 0.075, 'Ice thickness (m)', ha='center', fontsize=title_font)
 f.text(0.075, 0.5, 'Latitude', va='center', rotation='vertical', fontsize=title_font)
 
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'era5_lakes_icedepth_fliphist.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_6.png',bbox_inches='tight',dpi=500)
 
 

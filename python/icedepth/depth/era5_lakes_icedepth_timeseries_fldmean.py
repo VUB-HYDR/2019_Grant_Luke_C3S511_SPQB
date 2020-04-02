@@ -40,17 +40,17 @@ def reader(file):
 #SETTINGS
 #==============================================================================
 
-title_font = 12
+title_font = 13
 
-tick_font = 10
+tick_font = 11
 
 #==============================================================================
 #INITIALIZE
 #==============================================================================
 
-directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/icedepth/depth/fldmean'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/depth/fldmean'
 os.chdir(directory)
-o_directory = '/Users/Luke/Documents/PHD/C3S_511/FIGURES/icedepth'
+o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
 files = []
 for file in sorted(os.listdir(directory)):
@@ -76,10 +76,10 @@ f, ax = plt.subplots(1,1,figsize=(12,8 ),sharex=True)
 time = DJF.time.values
 
 #load data
-h = ax.plot(time,DJF,lw=2,color='steelblue',label='De-Ja-Fe')
-h = ax.plot(time,MAM,lw=2,color='mediumseagreen',label='Ma-Ap-Ma')
-h = ax.plot(time,JJA,lw=2,color='indianred',label='Ju-Ju-Au')
-h = ax.plot(time,SON,lw=2,color='sienna',label='Se-Oc-No')
+h = ax.plot(time,DJF,lw=2,color='steelblue',label='DJF')
+h = ax.plot(time,MAM,lw=2,color='mediumseagreen',label='MAM')
+h = ax.plot(time,JJA,lw=2,color='indianred',label='JJA')
+h = ax.plot(time,SON,lw=2,color='sienna',label='SON')
 
 #figure adjustments
 ax.set_xlim(1979,2019)
@@ -93,16 +93,16 @@ ax.set_axisbelow(True)
 
 #legend
 handles, labels = ax.get_legend_handles_labels()
-f.legend(handles, labels, bbox_to_anchor=(0.7, 0.5, 0.1, .15), loc=3,
+f.legend(handles, labels, bbox_to_anchor=(0.7, 0.5, 0.075, .15), loc=3,
            mode="expand", borderaxespad=0.,\
            frameon=True, handlelength=0.75, handletextpad=0.5,\
            fontsize=title_font, facecolor='white', edgecolor='k')
 
 #labels
 f.text(0.5, 0.065, 'Years', ha='center', fontsize=title_font)
-f.text(0.065, 0.5, 'Ice depth (m)', va='center', rotation='vertical', fontsize=title_font)
+f.text(0.065, 0.5, 'Ice thickness (m)', va='center', rotation='vertical', fontsize=title_font)
 
 plt.show(h)
 
 #save figure
-f.savefig(o_directory+'/'+'era5_lakes_icedepth_4seasons_fldmean.png',bbox_inches='tight',dpi=900)
+f.savefig(o_directory+'/'+'D511.N.n.x_ERA5-land_lakes_mixedlayertemperature_icedepth_Section_2.4.2_Figure_5.png',bbox_inches='tight',dpi=900)
