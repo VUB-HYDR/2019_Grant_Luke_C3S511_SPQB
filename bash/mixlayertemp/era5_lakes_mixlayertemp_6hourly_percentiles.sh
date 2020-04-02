@@ -4,6 +4,8 @@
 # SUMMARY
 # =======================================================================
 
+# April 1st
+
 # Operations on C3S_511 mixlayertemp files:
     # daily aggregation
     # masking for inland water bodies
@@ -17,7 +19,7 @@
 module load CDO
 
 # set output directory
-outDIR=/theia/data/brussel/101/vsc10116/C3S_511/mixlayertemp
+outDIR=/theia/data/brussel/101/vsc10116/C3S_511/mixlayertemp_v2
 
 # user scratch directory
 scratchDIR=/theia/scratch/projects/climate/users/lgrant
@@ -49,8 +51,7 @@ echo ' '
 
 
 # prep start file to day res
-cdo -b F64 -O -L setreftime,1979-01-01,00:00:00,1days -settaxis,1979-01-01,00:00:00,1days -daymean era5_lakes_mixlayertemp_6hourly_1979_2019.nc $scratchDIR/startfile.nc
-
+cdo -b F64 -O -L setreftime,1979-01-01,00:00:00,1days -settaxis,1979-01-01,00:00:00,1days -daymean era5_lakes_mixlayertemp_6hourly_1979_2019_v2.nc $scratchDIR/startfile.nc
 
 # mask starting file
 cdo ifthen $maskDIR/lakemask.nc $scratchDIR/startfile.nc $scratchDIR/mixlayertemp_daily_1979_2019.nc
@@ -81,9 +82,6 @@ cdo timmax $scratchDIR/mixlayertemp_daily_1979_2019.nc $scratchDIR/maxfile.nc
 echo ' '
 echo 'PERCENTILES CALC'
 echo ' '
-
-
-cdo timpctl,90 ifile minfile maxfile ofile
 
 
 for PERC in "${PERCENTs[@]}"; do
