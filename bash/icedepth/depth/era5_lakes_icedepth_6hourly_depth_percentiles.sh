@@ -4,6 +4,8 @@
 # SUMMARY
 # =======================================================================
 
+# April 1st
+
 # Operations on C3S_511 ice depth files to calculate percentiles:
     # daily aggregation
     # mask for inland water bodies
@@ -13,17 +15,14 @@
 # INITIALIZATION
 # =======================================================================
 
-# load CDO
-module load CDO
-
 # set output directory
-outDIR=/theia/data/brussel/101/vsc10116/C3S_511/icedepth/depth
+outDIR=/theia/data/brussel/101/vsc10116/C3S_511/era5/icedepth/depth_v2
 
 # user scratch directory
-scratchDIR=/theia/scratch/projects/climate/users/lgrant
+scratchDIR=/theia/scratch/projects/climate/users/lgrant/era5/proc/icedepth
 
 # set mask directory (lakecover)
-maskDIR=/theia/data/brussel/101/vsc10116/C3S_511/lakecover
+maskDIR=/theia/data/brussel/101/vsc10116/C3S_511/era5/lakecover
 
 # set starting directory
 inDIR=/theia/scratch/projects/climate/data/dataset/era5/lakes/icedepth
@@ -49,7 +48,7 @@ echo ' '
 
 
 # prep start file to day res
-cdo -b F64 -O -L setreftime,1979-01-01,00:00:00,1days -settaxis,1979-01-01,00:00:00,1days -daymean era5_lakes_icedepth_6hourly_1979_2019.nc $scratchDIR/startfile.nc
+cdo -b F64 -O -L setreftime,1979-01-01,00:00:00,1days -settaxis,1979-01-01,00:00:00,1days -daymean era5_lakes_icedepth_6hourly_1979_2019_v2.nc $scratchDIR/startfile.nc
 
 
 # mask starting file
