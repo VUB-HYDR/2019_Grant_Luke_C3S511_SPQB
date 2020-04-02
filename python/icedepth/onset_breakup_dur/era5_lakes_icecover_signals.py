@@ -22,6 +22,7 @@ import numpy as np
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import os
 
 #==============================================================================
 #FUNCTIONS
@@ -41,9 +42,11 @@ def reader(filename):
 #SETTINGS
 #==============================================================================
 
-title_font = 10
+title_font = 13
 
-tick_font = 8
+arrow_font = 11
+
+tick_font = 11
 
 lats_font = 7
 
@@ -51,30 +54,30 @@ lats_font = 7
 #INITIALIZE DIRECTORIES
 #==============================================================================
 
-#output directory
-o_directory = '/Users/Luke/Documents/PHD/C3S_511/FIGURES/icedepth'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/cover/signals'
+os.chdir(directory)
+o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
-#AMSR data and masks
-startfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/icedepth/cover/signals/era5_lakes_icecover_start_signal_1979_2019.nc'
-endfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/icedepth/cover/signals/era5_lakes_icecover_end_signal_1979_2019.nc'
-durfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/icedepth/cover/signals/era5_lakes_icecover_duration_signal_1979_2019.nc'
-
+files = []
+for file in sorted(os.listdir(directory)):
+    if '.nc' in file:
+        files.append(file)
 
 #==============================================================================
-#DATA AND MIN/MAXES FOR CHECK
+#DATA 
 #==============================================================================
 
-start_plottable = reader(startfile)
-end_plottable = reader(endfile)
-dur_plottable = reader(durfile)
+start_plottable = reader(files[2])
+end_plottable = reader(files[1])
+dur_plottable = reader(files[0])
 
 signals = [start_plottable,end_plottable,dur_plottable]
 
-lat = start_plottable.lat.values
-lon = start_plottable.lon.values
+lat = start_plottable.latitude.values
+lon = start_plottable.longitude.values
 
 ice_titles = ['Ice onset', 'Ice break-up', 'Ice duration']
-letters = ['a', 'b', 'c']
+letters = ['a)', 'b)', 'c)']
 
 #==============================================================================
 #PLOT TEST HIST
@@ -128,6 +131,10 @@ cmap = mpl.colors.ListedColormap([cmap_50,cmap_40,cmap_35,cmap_30,cmap_25,cmap_2
 cmap.set_over(cmap55)
 cmap.set_under(cmap_55)
 
+values = [-30,-25,-20,-15,-10,-5,-1,1,5,10,15,20,25,30]
+tick_locs = [-30,-25,-20,-15,-10,-5,0,5,10,15,20,25,30]
+norm = mpl.colors.BoundaryNorm(values,cmap.N,clip=True)
+
 #=============================================================================
 #SET PLOTS
 #=============================================================================
@@ -151,7 +158,7 @@ for rcpmap,ax in zip(signals,axes.flatten()):
     m.drawparallels(parallels,linewidth=0.1,color='0.75')
     for i in np.arange(len(parallels[:-1])):
         ax.annotate(parallels_lbs[i],xy=m(342.5,parallels[i]),fontsize=lats_font)
-    m.pcolormesh(lon,lat,rcpmap,latlon=True,cmap=cmap,vmax=30,vmin=-30,zorder=3)
+    m.pcolormesh(lon,lat,rcpmap,latlon=True,cmap=cmap,norm=norm,vmax=30,vmin=-30,zorder=3)
     if count<=3:
         ax.set_title(ice_titles[count-1],loc='center',fontsize=title_font)
         ax.set_title(letters[count-1],loc='left',fontsize=title_font)
@@ -161,11 +168,6 @@ for rcpmap,ax in zip(signals,axes.flatten()):
 #COLORBAR
 #==============================================================================
         
-values = [-30,-25,-20,-15,-10,-5,-1,1,5,10,15,20,25,30]
-
-tick_locs = [-30,-25,-20,-15,-10,-5,0,5,10,15,20,25,30]
-
-norm = mpl.colors.BoundaryNorm(values,cmap.N)
 cbaxes = f.add_axes([0.215, 0.35, 0.6, 0.015])
 cb = mpl.colorbar.ColorbarBase(ax=cbaxes,cmap=cmap,
                                norm=norm,
@@ -173,7 +175,7 @@ cb = mpl.colorbar.ColorbarBase(ax=cbaxes,cmap=cmap,
                                orientation='horizontal',
                                extend='both',
                                ticks=tick_locs)
-cb.set_label('Change in ice onset, break-up and duration (days)',size=title_font)
+cb.set_label('Change in ice onset, break-up or duration (days)',size=title_font)
 cb.ax.xaxis.set_label_position('top');
 cb.ax.tick_params(labelcolor='0.2',labelsize=tick_font,color='0.2',\
                   length=2.5,width=0.35,direction='out'); #change color of ticks?
@@ -186,8 +188,8 @@ cb.outline.set_linewidth(0.4)
 bluelabel = 'Later date (panels a,b) or longer duration (panel c)'
 redlabel = 'Earlier date (panels a,b) or shorter duration (panel c)'
 
-plt.text(0.75, -2.8, bluelabel, size=title_font, ha='center', va='center')
-plt.text(0.25, -2.8, redlabel, size=title_font, ha='center', va='center')
+plt.text(0.75, -2.8, bluelabel, size=arrow_font, ha='center', va='center')
+plt.text(0.25, -2.8, redlabel, size=arrow_font, ha='center', va='center')
 
 plt.arrow(0.505, -3.5, 0.5, 0, width=0.25, linewidth=0.1, label=bluelabel,\
           shape='right', head_width=0.5, head_length=0.06,\
@@ -201,7 +203,7 @@ plt.subplots_adjust(left=0.175, right=0.85, bottom=0.2, top=0.875, wspace=0.03, 
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'era5_lakes_icedepth_icecover_signals.png',bbox_inches='tight',dpi=900 )
+f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.2_Figure_3.png',bbox_inches='tight',dpi=900 )
 
 
 

@@ -46,17 +46,17 @@ def reducer(file):
 #SETTINGS
 #==============================================================================
 
-title_font = 12
+title_font = 13
 
-tick_font = 10
+tick_font = 11
 
 #==============================================================================
 #INITIALIZE
 #==============================================================================
 
-directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/icedepth/cover/timmean'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/cover/timmean'
 os.chdir(directory)
-o_directory = '/Users/Luke/Documents/PHD/C3S_511/FIGURES/icedepth'
+o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
 files = []
 for file in sorted(os.listdir(directory)):
@@ -67,7 +67,6 @@ for file in sorted(os.listdir(directory)):
 #OPEN DATA
 #==============================================================================
 
-
 STARTmean,STARTstd,STARTlat = reducer(files[2])
 ENDmean,ENDstd,ENDlat = reducer(files[1])
 DURmean,DURstd,DURlat = reducer(files[0])
@@ -77,7 +76,8 @@ seasons = [[STARTmean,STARTstd,STARTlat],\
            [ENDmean,ENDstd,ENDlat],\
            [DURmean,DURstd,DURlat]]
 
-months = ['a) Ice onset','b) Ice breakup','c) Ice duration']
+indices = ['Ice onset','Ice break-up','Ice duration']
+letters = ['a)','b)','c)']
 
 #==============================================================================
 #PLOT HISTOGRAM
@@ -96,15 +96,16 @@ for season,ax in zip(seasons,axes.flat):
                 lw=0.1, color='#a6bddb', zorder=1)
         ax.set_ylim(20,90)
         ax.set_yticks(np.arange(20,90,10))
-        ax.set_yticklabels(['20°','30°','40°','50°','60°','70°','80°','90°'])
+        ax.set_yticklabels(['20°','30°','40°','50°','60°','70°','80°','90°'],fontdict={'fontsize':tick_font})
         ax.set_xticks(ticks = np.arange(245,615,30))
-        ax.set_xticklabels(['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'])
+        ax.set_xticklabels(['Sep',None,'Nov',None,'Jan',None,'Mar',None,'May',None,'Jul',None,'Sep'],fontdict={'fontsize':tick_font})
         ax.set_xlim(245,615)
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
         ax.xaxis.grid(color='0.8', linestyle='dashed', linewidth=0.5,zorder=0)
         ax.set_axisbelow(True)
-        ax.set_title(months[count-1],loc='left',fontsize=title_font)
+        ax.set_title(letters[count-1],loc='left',fontsize=title_font)
+        ax.set_title(indices[count-1],loc='center',fontsize=title_font)
     if count == 3:
         ax.plot(season[0], season[2], lw=3, color='steelblue', zorder=1)
         ax.fill_betweenx(season[2], (season[0]+season[1]),\
@@ -118,7 +119,8 @@ for season,ax in zip(seasons,axes.flat):
         ax.spines['top'].set_visible(False)
         ax.xaxis.grid(color='0.8', linestyle='dashed', linewidth=0.5,zorder=0)
         ax.set_axisbelow(True)
-        ax.set_title(months[count-1],loc='left',fontsize=title_font)
+        ax.set_title(letters[count-1],loc='left',fontsize=title_font)
+        ax.set_title(indices[count-1],loc='center',fontsize=title_font)
         
 
 #labels
@@ -129,6 +131,6 @@ f.text(0.075, 0.5, 'Latitude', va='center', rotation='vertical', fontsize=title_
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'era5_lakes_icedepth_cover_fliphist.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_8.png',bbox_inches='tight',dpi=500)
 
 

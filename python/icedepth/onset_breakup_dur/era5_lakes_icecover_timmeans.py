@@ -41,9 +41,9 @@ def reader(filename):
 #SETTINGS
 #==============================================================================
 
-title_font = 10
+title_font = 13
 
-tick_font = 8
+tick_font = 11
 
 lats_font = 7
 
@@ -52,12 +52,12 @@ lats_font = 7
 #==============================================================================
 
 #output directory
-o_directory = '/Users/Luke/Documents/PHD/C3S_511/FIGURES/icedepth'
+o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
 #data
-startfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/icedepth/cover/timmean/era5_lakes_icecover_start_global_timmean_1979_2018.nc'
-endfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/icedepth/cover/timmean/era5_lakes_icecover_end_global_timmean_1979_2018.nc'
-durfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/icedepth/cover/timmean/era5_lakes_icecover_duration_global_timmean_1979_2018.nc'
+startfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/cover/timmean/era5_lakes_icecover_start_global_timmean_1981_2019.nc'
+endfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/cover/timmean/era5_lakes_icecover_end_global_timmean_1981_2019.nc'
+durfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/cover/timmean/era5_lakes_icecover_duration_global_timmean_1981_2019.nc'
 
 
 #==============================================================================
@@ -148,7 +148,7 @@ parallels_lbs = ['30°','40°','50°','60°','70°'];
 m = Basemap(projection='npaeqd',round=True,boundinglat=20,\
             lat_0=80,lon_0=0,resolution='l');
 m.ax = ax1
-ax1.set_title('a',fontsize=title_font,loc='left')
+ax1.set_title('a)',fontsize=title_font,loc='left')
 ax1.set_title('Ice onset',fontsize=title_font,loc='center')
 m.drawcoastlines(linewidth=0.2);
 m.drawmapboundary(linewidth=0.15);
@@ -156,7 +156,7 @@ m.fillcontinents(color='lightgrey');
 m.drawparallels(parallels,linewidth=0.1,color='0.75')
 for i in np.arange(len(parallels[:-1])):
     ax1.annotate(parallels_lbs[i],xy=m(342.5,parallels[i]),fontsize=lats_font)
-m.pcolormesh(lon, lat, start_plottable, latlon=True, cmap=cmap, vmax=605, vmin=240, zorder=3)
+m.pcolormesh(lon, lat, start_plottable, latlon=True, cmap=cmap, vmax=610, vmin=245, zorder=3)
 
 #setup colorbar
 values = np.arange(240,610,10)
@@ -183,7 +183,7 @@ cb.outline.set_linewidth(0.35)
 
 m2 = Basemap(projection='npaeqd',round=True,boundinglat=20,lat_0=90,lon_0=0,resolution='l');
 m2.ax = ax2
-ax2.set_title('b',fontsize=title_font,loc='left')
+ax2.set_title('b)',fontsize=title_font,loc='left')
 ax2.set_title('Ice break-up',fontsize=title_font,loc='center')
 m2.drawcoastlines(linewidth=0.2);
 m2.drawmapboundary(linewidth=0.15);
@@ -191,7 +191,7 @@ m2.fillcontinents(color='lightgrey');
 m2.drawparallels(parallels,linewidth=0.1,color='0.75')
 for i in np.arange(len(parallels[:-1])):
     ax2.annotate(parallels_lbs[i],xy=m2(342.5,parallels[i]),fontsize=lats_font)
-m2.pcolormesh(lon, lat, end_plottable, latlon=True, cmap=cmap, vmax=635, vmin=270, zorder=3)
+m2.pcolormesh(lon, lat, end_plottable, latlon=True, cmap=cmap, vmax=610, vmin=245, zorder=3)
 
 
 #=============================================================================
@@ -200,7 +200,7 @@ m2.pcolormesh(lon, lat, end_plottable, latlon=True, cmap=cmap, vmax=635, vmin=27
 
 m3 = Basemap(projection='npaeqd',round=True,boundinglat=20,lat_0=90,lon_0=0,resolution='l');
 m3.ax = ax3
-ax3.set_title('c',fontsize=title_font,loc='left')
+ax3.set_title('c)',fontsize=title_font,loc='left')
 ax3.set_title('Ice duration',fontsize=title_font,loc='center')
 m3.drawcoastlines(linewidth=0.2);
 m3.drawmapboundary(linewidth=0.15);
@@ -233,4 +233,4 @@ plt.subplots_adjust(left=0.125, right=0.9, bottom=0.1, top=0.9, wspace=0.03, hsp
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'era5_lakes_icedepth_icecover_timmeans.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.N.n.x_ERA5-land_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_7.png',bbox_inches='tight',dpi=500)
