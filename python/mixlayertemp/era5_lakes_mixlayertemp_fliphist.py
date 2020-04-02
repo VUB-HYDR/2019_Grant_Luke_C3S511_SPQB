@@ -41,17 +41,17 @@ def reducer(file):
 #SETTINGS
 #==============================================================================
 
-title_font = 10
+title_font = 12
 
-tick_font = 8
+tick_font = 10
 
 #==============================================================================
 #INITIALIZE
 #==============================================================================
 
-directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/mixlayertemp/newmonths/timmean'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/mixlayertemp/timmean'
 os.chdir(directory)
-o_directory = '/Users/Luke/Documents/PHD/C3S_511/FIGURES/mixlayertemp'
+o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
 files = []
 for file in sorted(os.listdir(directory)):
@@ -72,7 +72,8 @@ seasons = [[DJFmean,DJFstd,DJFlat],\
            [JJAmean,JJAstd,JJAlat],\
            [SONmean,SONstd,SONlat]]
 
-letters = ['a) De-Ja-Fe','b) Ma-Ap-Ma','c) Ju-Ju-Au','d) Se-Oc-No']
+season_names = ['DJF', 'MAM', 'JJA', 'SON']
+letters = ['a)','b)','c)','d)']
 
 #==============================================================================
 #PLOT HISTOGRAM
@@ -98,6 +99,7 @@ for season,ax in zip(seasons,axes.flat):
     ax.xaxis.grid(color='0.8', linestyle='dashed', linewidth=0.5,zorder=0)
     ax.set_axisbelow(True)
     ax.set_title(letters[count-1],loc='left',fontsize=title_font)
+    ax.set_title(season_names[count-1],loc='center',fontsize=title_font)
 
 #labels
 f.text(0.5, 0.05, 'Lake temperature (K)', ha='center', fontsize=title_font)
@@ -106,6 +108,6 @@ f.text(0.045, 0.5, 'Latitude', va='center', rotation='vertical', fontsize=title_
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'era5_lakes_mixlayertemp_fliphist.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_3.png',bbox_inches='tight',dpi=500)
 
 

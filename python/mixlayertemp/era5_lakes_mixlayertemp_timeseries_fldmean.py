@@ -30,31 +30,30 @@ import matplotlib.pyplot as plt
 #SETTINGS
 #==============================================================================
 
-title_font = 12
+title_font = 13
 
-tick_font = 10
+tick_font = 11
 
 #==============================================================================
 #INITIALIZE
 #==============================================================================
 
-directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/mixlayertemp/newmonths/fldmean'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/mixlayertemp/fldmean'
 os.chdir(directory)
-o_directory = '/Users/Luke/Documents/PHD/C3S_511/FIGURES/mixlayertemp'
+o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
 files = []
 for file in sorted(os.listdir(directory)):
     if '.nc' in file:
         files.append(file)
  
-time = np.arange(1979,2019,1)
+time = np.arange(1979,2020,1)
 
 #open time series
-MAM = xr.open_dataset(files[2],decode_times=False).lmlt.squeeze(dim=['lat','lon']).values[:-1]
-DJF = xr.open_dataset(files[0],decode_times=False).lmlt.squeeze(dim=['lat','lon']).values[:-1]
+MAM = xr.open_dataset(files[2],decode_times=False).lmlt.squeeze(dim=['lat','lon']).values
+DJF = xr.open_dataset(files[0],decode_times=False).lmlt.squeeze(dim=['lat','lon']).values
 JJA = xr.open_dataset(files[1],decode_times=False).lmlt.squeeze(dim=['lat','lon']).values
 SON = xr.open_dataset(files[3],decode_times=False).lmlt.squeeze(dim=['lat','lon']).values
-YEAR = xr.open_dataset(files[4],decode_times=False).lmlt.squeeze(dim=['lat','lon']).values[:-1]
 
 #==============================================================================
 #PLOTTING
@@ -64,11 +63,10 @@ YEAR = xr.open_dataset(files[4],decode_times=False).lmlt.squeeze(dim=['lat','lon
 f, ax = plt.subplots(1,1,figsize=(12,8 ),sharex=True)
 
 #load data
-h = ax.plot(time,DJF,lw=2,color='steelblue',label='De-Ja-Fe')
-h = ax.plot(time,MAM,lw=2,color='mediumseagreen',label='Ma-Ap-Ma')
-h = ax.plot(time,JJA,lw=2,color='indianred',label='Ju-Ju-Au')
-h = ax.plot(time,SON,lw=2,color='sienna',label='Se-Oc-No')
-h = ax.plot(time,YEAR,lw=2,color='k',label='Annual')
+h = ax.plot(time,DJF,lw=2,color='steelblue',label='DJF')
+h = ax.plot(time,MAM,lw=2,color='mediumseagreen',label='MAM')
+h = ax.plot(time,JJA,lw=2,color='indianred',label='JJA')
+h = ax.plot(time,SON,lw=2,color='sienna',label='SON')
 
 #figure adjustments
 ax.set_xlim(1979,2019)
@@ -82,7 +80,7 @@ ax.set_axisbelow(True)
 
 #legend
 handles, labels = ax.get_legend_handles_labels()
-f.legend(handles, labels, bbox_to_anchor=(0.7, 0.55, 0.1, .15), loc=3,
+f.legend(handles, labels, bbox_to_anchor=(0.7, 0.55, 0.08, .15), loc=3,
            mode="expand", borderaxespad=0.,\
            frameon=True, handlelength=0.75, handletextpad=0.5,\
            fontsize=title_font, facecolor='white', edgecolor='k')
@@ -94,4 +92,4 @@ f.text(0.065, 0.5, 'Mixed layer lake temperature (K)', va='center', rotation='ve
 plt.show(h)
 
 #save figure
-f.savefig(o_directory+'/'+'era5_lakes_mixlayertemp_4seasons_fldmean.png',bbox_inches='tight',dpi=900)
+f.savefig(o_directory+'/'+'D511.N.n.x_ERA5-land_lakes_mixedlayertemperature_icedepth_Section_2.4.2_Figure_4.png',bbox_inches='tight',dpi=900)

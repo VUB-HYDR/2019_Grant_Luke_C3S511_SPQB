@@ -10,7 +10,7 @@ Created on Wed Mar 20 13:18:37 2019
 #SUMMARY
 #==============================================================================
 
-#This script is used to plot era5 mixlayertemp signals (5yr avg future minus 5yr avg hist) for 4 seasons
+#This script is used to plot era5 mixlayertemp signals (10yr avg future minus 10yr avg hist) for 4 seasons
 
 #==============================================================================
 #IMPORT
@@ -31,17 +31,17 @@ import matplotlib as mpl
 #SETTINGS
 #==============================================================================
 
-title_font = 10
+title_font = 13
 
-tick_font = 8
+tick_font = 11
 
 #==============================================================================
 #INITIALIZE
 #==============================================================================
 
-directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/mixlayertemp/newmonths/signals'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/mixlayertemp/signals'
 os.chdir(directory)
-o_directory = '/Users/Luke/Documents/PHD/C3S_511/FIGURES/mixlayertemp'
+o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
 files = []
 for file in sorted(os.listdir(directory)):
@@ -62,8 +62,8 @@ lat = SON.lat.values
 
 seasons = [DJF,MAM,JJA,SON]
 
-season_names = ['De-Ja-Fe', 'Ma-Ap-Ma', 'Ju-Ju-Au', 'Se-Oc-No']
-letters = ['a','b','c','d']
+season_names = ['DJF', 'MAM', 'JJA', 'SON']
+letters = ['a)','b)','c)','d)']
 
 #==============================================================================
 #PLOT TEST HIST
@@ -123,6 +123,10 @@ cmap = mpl.colors.ListedColormap([cmap_50,cmap_40,cmap_30,cmap_20,cmap0,
 #set color of over/under arrows on colorbar
 cmap.set_over(cmap55)
 cmap.set_under(cmap_55)
+
+values = [-4,-3,-2,-1,-0.5,0.5,1,2,3,4]
+tick_locs = [-4,-3,-2,-1,0,1,2,3,4]
+norm = mpl.colors.BoundaryNorm(values,cmap.N)
     
 parallels = np.arange(-60.,91.,30.);
 meridians = np.arange(-135.,136.,45.);
@@ -133,7 +137,7 @@ for season,ax in zip(seasons,axes.flat):
     count=count+1
     m = Basemap(llcrnrlon=-170, llcrnrlat=-60, urcrnrlon=180, urcrnrlat=90, suppress_ticks=False);
     m.ax = ax
-    ax.set_title(season_names[count-1],loc='right',fontsize=title_font)
+    ax.set_title(season_names[count-1],loc='center',fontsize=title_font)
     ax.set_title(letters[count-1],loc='left',fontsize=title_font)
     m.drawcoastlines(linewidth=0.2);
     m.drawmapboundary(fill_color='whitesmoke')
@@ -154,16 +158,12 @@ for season,ax in zip(seasons,axes.flat):
     ax.spines['right'].set_color('0.2')
     ax.spines['right'].set_linewidth(0.4)
     ax.yaxis.label.set_color('0.2')
-    h = m.pcolormesh(lon, lat, season, latlon=True, cmap=cmap, vmin=-4, vmax=4, zorder=2)
+    h = m.pcolormesh(lon, lat, season, latlon=True, cmap=cmap, norm=norm, vmin=-4, vmax=4, zorder=2)
 
 #=============================================================================
 #COLORBAR
 #=============================================================================
     
-values = [-4,-3,-2,-1,-0.5,0.5,1,2,3,4]
-tick_locs = [-4,-3,-2,-1,0,1,2,3,4]
-
-norm = mpl.colors.BoundaryNorm(values,cmap.N)
 cbaxes = f.add_axes([0.25, 0.15, 0.5, 0.015])
 cb = mpl.colorbar.ColorbarBase(ax=cbaxes, cmap=cmap,
                                norm=norm,
@@ -199,7 +199,7 @@ plt.subplots_adjust(left=0.15, right=0.85, bottom=0.175, top=0.6, wspace=0.1, hs
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'era5_lakes_mixlayertemp_4seasons_signals.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.2_Figure_1.png',bbox_inches='tight',dpi=500)
 
 
 

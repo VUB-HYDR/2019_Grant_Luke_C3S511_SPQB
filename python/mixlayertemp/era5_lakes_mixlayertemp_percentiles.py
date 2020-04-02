@@ -42,17 +42,17 @@ def truncate(n, decimals=1):
 #SETTINGS
 #==============================================================================
 
-title_font = 10
+title_font = 13
 
-tick_font = 8
+tick_font = 11
 
 #==============================================================================
 #INITIALIZE
 #==============================================================================
 
-directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/mixlayertemp/percentiles'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/mixlayertemp/percentiles'
 os.chdir(directory)
-o_directory = '/Users/Luke/Documents/PHD/C3S_511/FIGURES/mixlayertemp'
+o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
 files = []
 for file in sorted(os.listdir(directory)):
@@ -180,7 +180,7 @@ plt.subplots_adjust(left=0.15, right=0.85, bottom=0.25, top=0.6, wspace=0.1, hsp
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'era5_lakes_mixlayertemp_percentiles.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_2.png',bbox_inches='tight',dpi=500)
 
 
 

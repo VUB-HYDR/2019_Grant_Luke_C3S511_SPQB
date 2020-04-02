@@ -31,17 +31,17 @@ import matplotlib as mpl
 #SETTINGS
 #==============================================================================
 
-title_font = 10
+title_font = 13
 
-tick_font = 8
+tick_font = 11
 
 #==============================================================================
 #INITIALIZE
 #==============================================================================
 
-directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/mixlayertemp/newmonths/timmean'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/mixlayertemp/timmean'
 os.chdir(directory)
-o_directory = '/Users/Luke/Documents/PHD/C3S_511/FIGURES/mixlayertemp'
+o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
 files = []
 for file in sorted(os.listdir(directory)):
@@ -62,8 +62,8 @@ lat = SON.lat.values
 
 seasons = [DJF,MAM,JJA,SON]
 
-season_names = ['De-Ja-Fe', 'Ma-Ap-Ma', 'Ju-Ju-Au', 'Se-Oc-No']
-letters = ['a','b','c','d']
+season_names = ['DJF', 'MAM', 'JJA', 'SON']
+letters = ['a)','b)','c)','d)']
 
 #=============================================================================
 #PLOT
@@ -107,7 +107,7 @@ for season,ax in zip(seasons,axes.flat):
     count=count+1
     m = Basemap(llcrnrlon=-170, llcrnrlat=-60, urcrnrlon=180, urcrnrlat=90, suppress_ticks=False);
     m.ax = ax
-    ax.set_title(season_names[count-1],loc='right',fontsize=title_font)
+    ax.set_title(season_names[count-1],loc='center',fontsize=title_font)
     ax.set_title(letters[count-1],loc='left',fontsize=title_font)
     m.drawcoastlines(linewidth=0.2);
     m.drawmapboundary(fill_color='whitesmoke')
@@ -157,7 +157,7 @@ plt.subplots_adjust(left=0.15, right=0.85, bottom=0.175, top=0.6, wspace=0.1, hs
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'era5_lakes_mixlayertemp_4seasons.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_1.png',bbox_inches='tight',dpi=500)
 
 
 
