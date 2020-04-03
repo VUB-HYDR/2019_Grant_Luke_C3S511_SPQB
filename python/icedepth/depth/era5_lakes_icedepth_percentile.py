@@ -52,7 +52,7 @@ lats_font = 7
 #INITIALIZE
 #==============================================================================
 
-directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5-land/04_2020/icedepth/depth/percentiles'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/depth/percentiles'
 
 o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
@@ -70,8 +70,8 @@ for file in sorted(os.listdir(directory)):
 
 sample_da,dead1,dead2 = reader(files[0])
 
-lat = sample_da.latitude.values
-lon = sample_da.longitude.values
+lat = sample_da.lat.values
+lon = sample_da.lon.values
 
 percs = ['_1_','_5_','_10_','_50_','_90_','_95_','_99_']
 
@@ -194,7 +194,7 @@ plt.subplots_adjust(left=0.25, right=0.75, bottom=0.25, top=0.8, wspace=0.05, hs
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_5.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.6.4.b1_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_5.png',bbox_inches='tight',dpi=500)
 
 
 

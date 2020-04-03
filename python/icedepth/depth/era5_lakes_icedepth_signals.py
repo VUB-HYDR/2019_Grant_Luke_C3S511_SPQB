@@ -46,7 +46,7 @@ lats_font = 7
 #INITIALIZE
 #==============================================================================
 
-directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/depth/signals'
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/depth/signal'
 
 o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
@@ -191,7 +191,7 @@ plt.subplots_adjust(left=0.25, right=0.75, bottom=0.2, top=0.85, wspace=0.05, hs
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.2_Figure_2.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.6.4.b1_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.2_Figure_2.png',bbox_inches='tight',dpi=500)
 
 
 
