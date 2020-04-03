@@ -22,6 +22,7 @@ import numpy as np
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import os
 
 #==============================================================================
 #FUNCTIONS
@@ -29,7 +30,7 @@ import matplotlib as mpl
 
 def reader(filename):
     ds = xr.open_dataset(filename, decode_times=False)
-    if 'duration' in filename:
+    if 'dur' in filename:
         da = ds.iceduration.squeeze(dim='time')
     if 'start' in filename:
         da = ds.icestart.squeeze(dim='time') #make october 1st 
@@ -51,22 +52,22 @@ lats_font = 7
 #INITIALIZE DIRECTORIES
 #==============================================================================
 
-#output directory
+directory = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/cover/timmean'
+os.chdir(directory)
 o_directory = '/Users/Luke/Documents/PHD/C3S_511/SPQB/04_2020/era5'
 
-#data
-startfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/cover/timmean/era5_lakes_icecover_start_global_timmean_1981_2019.nc'
-endfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/cover/timmean/era5_lakes_icecover_end_global_timmean_1981_2019.nc'
-durfile = '/Users/Luke/Documents/PHD/C3S_511/DATA/era5/04_2020/icedepth/cover/timmean/era5_lakes_icecover_duration_global_timmean_1981_2019.nc'
-
+files = []
+for file in sorted(os.listdir(directory)):
+    if '.nc' in file:
+        files.append(file)
 
 #==============================================================================
-#DATA AND MIN/MAXES FOR CHECK
+#DATA 
 #==============================================================================
 
-start_plottable = reader(startfile)
-end_plottable = reader(endfile)
-dur_plottable = reader(durfile)
+start_plottable = reader(files[2])
+end_plottable = reader(files[1])
+dur_plottable = reader(files[0])
 
 lat = start_plottable.lat.values
 lon = start_plottable.lon.values
@@ -233,4 +234,4 @@ plt.subplots_adjust(left=0.125, right=0.9, bottom=0.1, top=0.9, wspace=0.03, hsp
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'D511.N.n.x_ERA5-land_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_7.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.6.4.b1_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_7.png',bbox_inches='tight',dpi=500)

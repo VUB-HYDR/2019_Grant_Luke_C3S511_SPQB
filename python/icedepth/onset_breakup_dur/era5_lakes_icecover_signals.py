@@ -30,7 +30,7 @@ import os
 
 def reader(filename):
     ds = xr.open_dataset(filename, decode_times=False)
-    if 'duration' in filename:
+    if 'dur' in filename:
         da = ds.iceduration.squeeze(dim='time')
     if 'start' in filename:
         da = ds.icestart.squeeze(dim='time') #make october 1st 
@@ -73,8 +73,8 @@ dur_plottable = reader(files[0])
 
 signals = [start_plottable,end_plottable,dur_plottable]
 
-lat = start_plottable.latitude.values
-lon = start_plottable.longitude.values
+lat = start_plottable.lat.values
+lon = start_plottable.lon.values
 
 ice_titles = ['Ice onset', 'Ice break-up', 'Ice duration']
 letters = ['a)', 'b)', 'c)']
@@ -203,7 +203,7 @@ plt.subplots_adjust(left=0.175, right=0.85, bottom=0.2, top=0.875, wspace=0.03, 
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.2_Figure_3.png',bbox_inches='tight',dpi=900 )
+f.savefig(o_directory+'/'+'D511.6.4.b1_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.2_Figure_3.png',bbox_inches='tight',dpi=900 )
 
 
 

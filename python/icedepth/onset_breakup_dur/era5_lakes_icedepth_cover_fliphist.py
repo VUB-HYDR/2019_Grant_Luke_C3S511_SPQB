@@ -131,6 +131,6 @@ f.text(0.075, 0.5, 'Latitude', va='center', rotation='vertical', fontsize=title_
 plt.show()
 
 #save figure
-f.savefig(o_directory+'/'+'D511.N.n.x_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_8.png',bbox_inches='tight',dpi=500)
+f.savefig(o_directory+'/'+'D511.6.4.b1_ERA5_lakes_mixedlayertemperature_icedepth_Section_2.4.1_Figure_8.png',bbox_inches='tight',dpi=500)
 
 
