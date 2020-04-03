@@ -69,7 +69,7 @@ echo ' '
 
 for i in $(seq 0 11); do
 
-    cdo -b F64 -O -L timmean -selmon,$(($i+1)) -seldate,1981-01-01T00:00:00,2019-12-31T00:00:00 $scratchDIR/icedepth_monthly_1979_2019.nc $outDIR/timmean/era5_lakes_icedepth_timmean_${MONTHs[$i]}_1979_2019.nc
+    cdo -b F64 -O -L timmean -selmon,$(($i+1)) $scratchDIR/icedepth_monthly_1979_2019.nc $outDIR/era5_lakes_icedepth_timmean_${MONTHs[$i]}_1979_2019.nc
 
 done
 
@@ -82,7 +82,7 @@ echo ' '
 
 for i in $(seq 0 11); do
 
-    cdo -b F64 -O -L fldmean -selmon,$(($i+1)) -seldate,1981-01-01T00:00:00,2019-12-31T00:00:00 $scratchDIR/icedepth_monthly_1979_2019.nc $outDIR/timmean/era5_lakes_icedepth_fldmean_${MONTHs[$i]}_1979_2019.nc
+    cdo -b F64 -O -L fldmean -selmon,$(($i+1)) $scratchDIR/icedepth_monthly_1979_2019.nc $outDIR/era5_lakes_icedepth_fldmean_${MONTHs[$i]}_1979_2019.nc
 
 done
 
